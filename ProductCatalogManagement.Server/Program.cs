@@ -16,8 +16,22 @@ builder.Services.AddDbContext<ProductContext>(options =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularDevClient",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:4200")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 
 var app = builder.Build();
+
+app.UseCors("AllowAngularDevClient");
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
