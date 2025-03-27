@@ -7,4 +7,9 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\productcatalogmanagement.client\browser\</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\models\" />
+    <Folder Include="src\components\" />
+    <Folder Include="src\store\" />
+  </ItemGroup>
 </Project>

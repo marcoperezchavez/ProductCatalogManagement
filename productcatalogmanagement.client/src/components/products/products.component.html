@@ -1,0 +1,30 @@
+<div>
+  <h2>Product List</h2>
+  <button (click)="newProduct()">New Product</button>
+  <ul>
+    <li *ngFor="let product of products$ | async" (click)="selectProduct(product)">
+      {{ product.name }} - {{ product.price | currency }}
+      <button (click)="deleteProduct(product.id); $event.stopPropagation()">Delete</button>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="selectedProduct">
+  <h2>{{ selectedProduct.id ? 'Edit' : 'New' }} Product</h2>
+  <form (ngSubmit)="saveProduct()">
+    <label>
+      Name:
+      <input [(ngModel)]="selectedProduct.name" name="name" required>
+    </label>
+    <label>
+      Price:
+      <input [(ngModel)]="selectedProduct.price" name="price" type="number" required>
+    </label>
+    <label>
+      Description:
+      <textarea [(ngModel)]="selectedProduct.description" name="description"></textarea>
+    </label>
+    <button type="submit">Save</button>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </form>
+</div>
